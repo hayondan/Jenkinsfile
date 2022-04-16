@@ -6,19 +6,30 @@ pipeline {
                 script {
                     properties([pipelineTriggers([pollSCM('* * * * *')])])
                 }
-                git 'https://github.com/hayondan/Project_1.git'
+                git 'https://github.com/hayondan/cfg.git'
             }
         }
         stage('run python') {
             steps {
                 script {
-                    if (Boolean.valueOf(env.UNIX)) {
-                        sh 'change.py'
+                    if (checkOs() == 'Windows') {
+                        bat 'python A32.py'
                     } else {
-                        bat 'change.py'
+                        sh 'python A32.py'
                     }
                 }
             }
         }
     }
 }
+
+def checkOs(){
+    if (isUnix()) {
+        def uname = sh script: 'uname', returnStdout: true
+        if (uname.startsWith("Darwin")) {
+            return "Macos"
+        }
+        else {
+            return "Linux"
+        }
+    }
