@@ -13,9 +13,9 @@ pipeline {
             steps {
                 script {
                     if (checkOs() == 'Windows') {
-                        bat 'python A32.10Master/A32.py'
+                        bat 'python A32.py'
                     } else {
-                        sh 'python A32.10Master/A32.py'
+                        sh 'python A32.py'
                     }
                 }
             }
