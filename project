@@ -6,7 +6,7 @@ pipeline {
                 script {
                     properties([pipelineTriggers([pollSCM('* * * * *')])])
                 }
-                git 'https://github.com/hayondan/Jenkinsfile.git'
+                git 'https://github.com/hayondan/cfg/Jenkinsfile.git'
             }
         }
         stage('run python') {
